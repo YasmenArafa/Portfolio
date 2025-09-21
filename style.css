@@ -1,15 +1,28 @@
 /* Basic Reset & Body Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 html {
     scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+    overflow-x: hidden; /* Hide horizontal scrollbar if any overflow */
 }
 
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     background-color: #f7f9fc; /* A subtle, light gray for light mode background */
     color: #343a40; /* Dark charcoal text */
+    overflow-x: hidden; /* Hide horizontal scrollbar if any overflow */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Remove extra space below images */
 }
 
 .container {
@@ -33,7 +46,7 @@ header nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
+    width: 80%; /* Maintain 80% width for desktop */
     margin: 0 auto;
 }
 
@@ -99,11 +112,12 @@ nav ul li a:hover::after {
     text-align: left;
     gap: 20px;
     flex-wrap: wrap;
+    width: 100%; /* Ensure it takes full available width within container */
 }
 
 .hero-text {
-    flex: 1;
-    min-width: 400px;
+    flex: 1 1 500px; /* Allow to grow, but start at 500px base for larger screens */
+    padding: 20px;
 }
 
 .hero-text .social-links {
@@ -152,11 +166,12 @@ nav ul li a:hover::after {
 }
 
 .hero-image {
-    flex: 1;
+    flex: 1 1 300px; /* Allow to grow, but start at 300px base */
     max-width: 400px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    padding: 20px; /* Add default padding */
 }
 
 .hero-image img {
@@ -864,14 +879,16 @@ body.dark-mode .close-button:focus {
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        width: 90%;
+        width: 100%; /* Ensure container takes full width on small screens */
+        padding: 0 15px; /* Add horizontal padding to the container */
     }
 
     header nav {
         flex-direction: column;
-        align-items: center; /* Center items horizontally */
+        align-items: center;
         padding: 10px 0;
         width: 100%; /* Ensure nav takes full width for centering */
+        box-sizing: border-box; /* Ensure padding is included in width */
     }
 
     .navbar-name {
@@ -900,15 +917,30 @@ body.dark-mode .close-button:focus {
     .home-content {
         flex-direction: column;
         text-align: center;
+        padding: 0; /* Remove padding from home-content */
+        gap: 0; /* Remove gap on small screens */
     }
 
     .hero-text {
-        min-width: unset;
-        width: 100%;
+        padding: 0; /* Remove padding for text on small screens */
+        flex: 1 1 auto; /* Allow full flexibility */
+        width: 100%; /* Ensure it takes full width */
+        text-align: center; /* Center the text content */
+        margin: 0; /* Remove any external margins */
+    }
+
+    .hero-text .social-links {
+        justify-content: center; /* Center social links */
+        gap: 15px;
     }
 
     .hero-image {
         margin-top: 30px;
+        padding: 0; /* Remove padding for image on small screens */
+        flex: 1 1 auto; /* Allow full flexibility */
+        width: 100%; /* Ensure it takes full width */
+        max-width: 300px; /* Limit image width */
+        margin: 0 auto; /* Center image */
     }
 
     .hero h1 {
@@ -981,15 +1013,30 @@ body.dark-mode .close-button:focus {
         grid-template-columns: 1fr; /* Single column on small screens */
     }
 
-    .skill-item {
-        width: 90%; /* Adjust width for single column layout */
-        min-width: unset;
-    }
-
     .skill-item,
     .service-item,
     .portfolio-item {
-        width: 90%;
+        width: 100%; /* Ensure full width for items */
+        max-width: 300px; /* Limit max width */
+        margin: 0 auto; /* Center items */
+    }
+}
+
+@media (min-width: 992px) { /* Apply these styles on larger screens */
+    .home-content {
+        /* Removed padding-left and padding-right from here */
+        padding: 0 50px; /* Add padding to the container itself on large screens */
+        width: 80%;
+    }
+
+    .hero-text {
+        padding-left: 150px; /* Reduced padding for text on large screens */
+        padding-right: 20px; /* Ensure consistent spacing */
+    }
+
+    .hero-image {
+        padding-right: 50px; /* Reduced padding for image on large screens */
+        padding-left: 20px; /* Ensure consistent spacing */
     }
 }
 
